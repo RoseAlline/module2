@@ -39,15 +39,6 @@ const touchEvent = () => {
       gameContainer.addEventListener("mouseup", function (event) { end(event) });
   }
 
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
-
-  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-    await newTile.waitForAnimationEnd()
-    alert("Try again!")
-    return;
-  }
-
   setupInputOnce();
 
 }
