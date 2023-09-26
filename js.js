@@ -12,6 +12,8 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
+  gameBoard.addEventListener("touchstart", handleInput, { once: true });
+  gameBoard.addEventListener("touchend", handleInput, { once: true });
 }
 
 window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
@@ -95,26 +97,24 @@ async function handleInput(event) {
     return;
   }
 
+  moveStartX = e.clientX;
+  moveStartY = e.clientY;
 
-  setupInputOnce();
-  gameBoard.addEventListener("touchstart", e => { 
-    moveStartX = e.clientX;
-    moveStartY = e.clientY;});
-  gameBoard.addEventListener("touchend", e => { 
-((event) => { end(event.changedTouches[0]); 
-let moveEndX = event.clientX;
-    let moveEndY = event.clientY;
+  let moveEndX = event.clientX;
+  let moveEndY = event.clientY;
 
-    var dx = moveEndX - moveStartX;
-    var dy = moveEndY - moveStartY;
+  var dx = moveEndX - moveStartX;
+  var dy = moveEndY - moveStartY;
 
-    var absDx = Math.abs(dx);
-    var absDy = Math.abs(dy);
+  var absDx = Math.abs(dx);
+  var absDy = Math.abs(dy);
 
-    if (Math.max(absDx, absDy) > 10) {
+  if (Math.max(absDx, absDy) > 10) {
         self.input("move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up"));
     }
-})});
+
+
+  setupInputOnce();
 
 }
 
