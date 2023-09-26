@@ -15,7 +15,7 @@ function setupInputOnce() {
   window.addEventListener("wheel", handleInput, { once: true });
 }
 
-window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
+document.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
 
 
 
