@@ -100,7 +100,7 @@ async function handleInput(event) {
 
   async function touchEvent(e) {
     const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
-    const gameContainer = document.querySelector(".game__container");
+    const gameContainer = document.getElementById("game-board");
     let moveStartX, moveStartY;
 
     const start = (event) => {
