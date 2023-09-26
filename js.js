@@ -96,8 +96,9 @@ async function handleInput(event) {
     alert("Try again!")
     return;
   }
+  
 
-const touchEvent = () => {
+  async function touchEvent(e) {
     const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
     const gameContainer = document.querySelector(".game__container");
     let moveStartX, moveStartY;
@@ -137,6 +138,7 @@ const touchEvent = () => {
 
 
   setupInputOnce();
+  touchEvent();
 
 }
 
