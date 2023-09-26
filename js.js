@@ -29,16 +29,6 @@ const touchEvent = () => {
 
   gameContainer.ondragstart = () => { return false; };
 
-  if (regexp.test(window.navigator.userAgent)) {
-
-      gameContainer.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-      gameContainer.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
-
-  } else {
-      gameContainer.addEventListener("mousedown", (event) => { start(event); });
-      gameContainer.addEventListener("mouseup", function (event) { end(event) });
-  }
-
   setupInputOnce();
 
 }
@@ -54,6 +44,10 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
+  gameContainer.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+  gameContainer.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+
+
 }
 
 window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
