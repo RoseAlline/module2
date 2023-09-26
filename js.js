@@ -1,3 +1,4 @@
+
 import { Grid } from "./grid.js";
 import { Tile } from "./tile.js";
 
@@ -42,19 +43,20 @@ const touchEvent = () => {
       }
   }
 
-  gameContainer.ondragstart = () => { return false; };
+  gameBoard.ondragstart = () => { return false; };
 
   if (regexp.test(window.navigator.userAgent)) {
 
-      gameContainer.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-      gameContainer.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+      gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+      gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 
   } else {
-      gameContainer.addEventListener("mousedown", (event) => { start(event); });
-      gameContainer.addEventListener("mouseup", function (event) { end(event) });
+      gameBoard.addEventListener("mousedown", (event) => { start(event); });
+      gameBoard.addEventListener("mouseup", function (event) { end(event) });
   }
 }
 
+touchEvent();
 
 async function handleInput(event) {
   switch (event.key || event.button || event.deltaY) {
