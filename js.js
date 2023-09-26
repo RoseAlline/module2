@@ -12,8 +12,7 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-  if (regexp.test(window.navigator.userAgent)) {
-    gameBoard.addEventListener("touchstart", touchEvent)}
+  gameBoard.addEventListener("touchstart", touchEvent, { once: true })
 }
 
 window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
