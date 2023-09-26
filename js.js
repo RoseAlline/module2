@@ -7,13 +7,13 @@ const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 setupInputOnce();
-touchEvent();
-
 
 function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
+  if (regexp.test(window.navigator.userAgent)) {
+    gameBoard.addEventListener("touchstart", touchEvent)}
 }
 
 window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
@@ -43,16 +43,6 @@ const touchEvent = () => {
   }
 
   gameBoard.ondragstart = () => { return false; };
-
-  if (regexp.test(window.navigator.userAgent)) {
-
-      gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-      gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
-
-  } else {
-    gameBoard.addEventListener("mousedown", (event) => { start(event); });
-    gameBoard.addEventListener("mouseup", function (event) { end(event) });
-}
 }
 
 
