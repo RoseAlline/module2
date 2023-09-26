@@ -3,18 +3,66 @@ import { Tile } from "./tile.js";
 
 const gameBoard = document.getElementById("game-board");
 
+const touchEvent = () => {
+  const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
+  let moveStartX, moveStartY;
+
+  const start = (event) => {
+      moveStartX = event.clientX;
+      moveStartY = event.clientY;
+  }
+
+  const end = (event) => {
+      let moveEndX = event.clientX;
+      let moveEndY = event.clientY;
+
+      var dx = moveEndX - moveStartX;
+      var dy = moveEndY - moveStartY;
+
+      var absDx = Math.abs(dx);
+      var absDy = Math.abs(dy);
+
+      if (Math.max(absDx, absDy) > 10) {
+          self.input("move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up"));
+      }
+  }
+
+  gameContainer.ondragstart = () => { return false; };
+
+  if (regexp.test(window.navigator.userAgent)) {
+
+      gameContainer.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+      gameContainer.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+
+  } else {
+      gameContainer.addEventListener("mousedown", (event) => { start(event); });
+      gameContainer.addEventListener("mouseup", function (event) { end(event) });
+  }
+
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
+
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    await newTile.waitForAnimationEnd()
+    alert("Try again!")
+    return;
+  }
+
+  setupInputOnce();
+
+}
+
 const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 setupInputOnce();
+touchEvent();
 
 
 function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-  gameBoard.addEventListener("touchstart", handleInput, { once: true });
-  gameBoard.addEventListener("touchend", handleInput, { once: true });
 }
 
 window.addEventListener("contextmenu", function (e) { e.preventDefault(); }, false);
@@ -89,43 +137,6 @@ async function handleInput(event) {
       
   }
 
-const touchEvent = () => {
-  const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
-  const gameContainer = document.getElementById("game-board");
-  let moveStartX, moveStartY;
-
-  const start = (event) => {
-      moveStartX = event.clientX;
-      moveStartY = event.clientY;
-  }
-
-  const end = (event) => {
-      let moveEndX = event.clientX;
-      let moveEndY = event.clientY;
-
-      var dx = moveEndX - moveStartX;
-      var dy = moveEndY - moveStartY;
-
-      var absDx = Math.abs(dx);
-      var absDy = Math.abs(dy);
-
-      if (Math.max(absDx, absDy) > 10) {
-          self.input("move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up"));
-      }
-  }
-
-  gameContainer.ondragstart = () => { return false; };
-
-  if (regexp.test(window.navigator.userAgent)) {
-
-      gameContainer.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-      gameContainer.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
-
-  } else {
-      gameContainer.addEventListener("mousedown", (event) => { start(event); });
-      gameContainer.addEventListener("mouseup", function (event) { end(event) });
-  }
-}
   
   const newTile = new Tile(gameBoard);
   grid.getRandomEmptyCell().linkTile(newTile);
