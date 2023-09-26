@@ -133,7 +133,6 @@ async function handleInput(event) {
         gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
         gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 }
-touchEvent();
 }
 
 async function moveUp() {
