@@ -34,6 +34,9 @@ function setupInputOnce() {
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
+document.addEventListener('touch', event => event.preventDefault());
+
+
 
 async function handleInput(event) {
   switch (event.key || event.button || event.deltaY || event.clientX || event.clientY) {
