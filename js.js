@@ -16,6 +16,7 @@ function setupInputOnce() {
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 window.addEventListener('touch', event => event.preventDefault());
+window.addEventListener('scrolltouch', event => event.preventDefault());
 
 
 async function handleInput(event) {
