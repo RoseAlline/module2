@@ -35,6 +35,8 @@ function setupInputOnce() {
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.addEventListener('touch', event => event.preventDefault());
+document.addEventListener('scroll', event => event.preventDefault());
+
 
 
 
