@@ -1,8 +1,22 @@
-
 import { Grid } from "./grid.js";
 import { Tile } from "./tile.js";
 
 const gameBoard = document.getElementById("game-board");
+const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
+let moveStartX, moveStartY;
+
+moveStartX = event.clientX;
+moveStartY = event.clientY;
+        
+let moveEndX = event.clientX;
+let moveEndY = event.clientY;
+
+var dx = moveEndX - moveStartX;
+var dy = moveEndY - moveStartY;
+var absDx = Math.abs(dx);
+var absDy = Math.abs(dy);
+    
+
 
 const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
@@ -18,48 +32,9 @@ function setupInputOnce() {
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-const touchEvent = () => {
-  const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
-  let moveStartX, moveStartY;
-
-  const start = (event) => {
-      moveStartX = event.clientX;
-      moveStartY = event.clientY;
-  }
-
-  const end = (event) => {
-      let moveEndX = event.clientX;
-      let moveEndY = event.clientY;
-
-      var dx = moveEndX - moveStartX;
-      var dy = moveEndY - moveStartY;
-
-      var absDx = Math.abs(dx);
-      var absDy = Math.abs(dy);
-
-
-     if (Math.max(absDx, absDy) > 10) {
-      var vector =  absDx > absDy ? (dx > 0 ? "MoveRight" : "MoveLeft") : (dy > 0 ? "MoveDown" : "MoveUp");
-      }
-  }
-
-  gameBoard.ondragstart = () => { return false; };
-
-  if (regexp.test(window.navigator.userAgent)) {
-
-      gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-      gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
-
-  } else {
-      gameBoard.addEventListener("mousedown", (event) => { start(event); });
-      gameBoard.addEventListener("mouseup", function (event) { end(event) });
-  }
-}
-
-touchEvent();
 
 async function handleInput(event) {
-  switch (event.key || event.button || event.deltaY) {
+  switch (event.key || event.button || event.deltaY || event.clientX || event.clientY) {
     case "ArrowUp":
       if (!canMoveUp()) {
         setupInputOnce();
@@ -119,7 +94,37 @@ async function handleInput(event) {
         await moveRight();
         break;
       }
-  
+         if (start(event.touches) > 0 & absDx > absDy) { 
+          if (!canMoveRight()) {
+          setupInputOnce();
+          return;
+        }
+        await moveRight();
+        break;
+      } else if (start(event.touches) < 0 & absDx > absDy) {
+        if (!canMoveLeft()) {
+          setupInputOnce();
+          return;
+        }
+        await moveLeft();
+        break;
+      }
+      if (start(event.touches) < 0 & absDx < absDy) {
+        if (!canMoveUp()) {
+          setupInputOnce();
+          return;
+        }
+        await moveUp();
+        break;
+      } else if (start(event.touches) > 0 & absDx < absDy) {
+        if (!canMoveDown()) {
+          setupInputOnce();
+          return;
+        }
+        await moveDown();
+        break;
+      }
+        
       setupInputOnce();
       return;
       
