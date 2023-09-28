@@ -16,7 +16,7 @@ function setupInputOnce() {
 
 document.addEventListener('contextmenu', event => event.preventDefault());
 window.addEventListener('touch', event => event.preventDefault());
-window.addEventListener('scroll', event => event.preventDefault());
+gameBoard.addEventListener('scroll', event => event.preventDefault());
 
 async function handleInput(event) {
   switch (event.key || event.button || event.deltaY) {
