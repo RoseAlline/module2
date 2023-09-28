@@ -10,8 +10,6 @@ body {
     align-items: center;
     height: 100vh;
     display: grid;
-    overflow: hidden;
-    overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
