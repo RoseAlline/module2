@@ -12,6 +12,14 @@ body {
     display: grid;
 }
 
+@media (max-width: 320px) {
+  #game-board {
+      padding: 100px 600px;
+  }
+}
+
+
+
 #game-board {
     --cell-size: 10vmin;
     --cell-gap: 2vmin;
