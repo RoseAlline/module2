@@ -12,10 +12,6 @@ body {
     display: grid;
 }
 
-::-webkit-scrollbar {
-  width: 0;
-}
-
 #game-board {
     --cell-size: 10vmin;
     --cell-gap: 2vmin;
@@ -58,3 +54,7 @@ body {
       transform: scale(0);
     }
   }
+
+::-webkit-scrollbar {
+  width: 0;
+}
