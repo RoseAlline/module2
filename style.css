@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
 }
 
 body {
@@ -25,7 +24,7 @@ body {
     grid-template-rows: repeat(5, var(--cell-size));
     gap: var(--cell-gap);
     border-radius: 1vmin;
-    padding: 30px 100px 0px 100px;
+    padding: 30px 0px 0px 0px;
 }
 
 .cell {
