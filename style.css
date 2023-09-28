@@ -25,6 +25,7 @@ body {
     grid-template-rows: repeat(5, var(--cell-size));
     gap: var(--cell-gap);
     border-radius: 1vmin;
+    padding: 30px 100px 0px 100px;
 }
 
 .cell {
