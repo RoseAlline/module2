@@ -12,12 +12,6 @@ body {
     display: grid;
 }
 
-@media (max-width: 320px) {
-  #game-board {
-      padding: 30px 600px 30px 600px;
-  }
-}
-
 
 
 #game-board {
