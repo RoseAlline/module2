@@ -13,7 +13,9 @@ body {
     overflow-y: hidden;
 }
 
-
+::-webkit-scrollbar {
+  width: 0;
+}
 
 #game-board {
     --cell-size: 10vmin;
