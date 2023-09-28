@@ -10,7 +10,10 @@ body {
     align-items: center;
     height: 100vh;
     display: grid;
+    overflow: hidden;
 }
+
+
 
 #game-board {
     --cell-size: 10vmin;
@@ -55,6 +58,3 @@ body {
     }
   }
 
-::-webkit-scrollbar {
-  width: 0;
-}
