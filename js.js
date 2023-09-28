@@ -11,6 +11,8 @@ body {
     height: 100vh;
     display: grid;
     overflow: hidden;
+    overflow-y: hidden; 
+    overflow-x: hidden;
 }
 
 
