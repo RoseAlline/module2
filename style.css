@@ -8,12 +8,14 @@ body {
     background-color: #333;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     display: grid;
     overflow: hidden;
-    overflow-y: hidden; 
-    overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}     
 
 
 #game-board {
@@ -58,4 +60,8 @@ body {
       transform: scale(0);
     }
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }     
 
