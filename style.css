@@ -11,11 +11,7 @@ body {
     height: 100vh;
     display: grid;
     overflow: hidden;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}     
+}  
 
 
 #game-board {
