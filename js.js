@@ -13,6 +13,9 @@ body {
     overflow: hidden;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}     
 
 
 #game-board {
