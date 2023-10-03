@@ -119,7 +119,7 @@ const touchEvent = () => {
       var absDy = Math.abs(dy);
 
       if (Math.max(absDx, absDy) > 10) {
-          self.input("move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up"));
+          "move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up");
       }
   }
 
