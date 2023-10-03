@@ -12,10 +12,7 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-}
 
-document.addEventListener('contextmenu', event => event.preventDefault());
-window.addEventListener('touch', event => event.preventDefault());
 
 async function handleInput(event) {
   switch (event.key || event.button || event.deltaY) {
@@ -147,6 +144,11 @@ const touchEvent = () => {
      gameBoard.addEventListener("mouseup", function (event) { end(event) });
   }
 }
+
+}
+
+document.addEventListener('contextmenu', event => event.preventDefault());
+window.addEventListener('touch', event => event.preventDefault());
 
 
 async function moveUp() {
