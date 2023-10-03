@@ -55,7 +55,7 @@ const touchEvent = () => {
      gameBoard.addEventListener("mousedown", (event) => { start(event); });
      gameBoard.addEventListener("mouseup", function (event) { end(event) });
   }
-
+  grid.getRandomEmptyCell().linkTile(newTile);
 }
 touchEvent()
 
