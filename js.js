@@ -78,38 +78,6 @@ async function handleInput(event) {
         await moveRight();
         break;
       }
-      if (Math.max(absDx, absDy) > 10) {
-      if (dx > 0) {
-        if (!canMoveRight()) {
-          setupInputOnce();
-          return;
-        }
-        await moveRight();
-        break;
-      } else if (dx < 0) {
-        if (!canMoveLeft()) {
-          setupInputOnce();
-          return;
-        }
-        await moveLeft();
-        break;
-      }
-      if (dy > 0) {
-        if (!canMoveDown()) {
-          setupInputOnce();
-          return;
-        }
-        await moveDown();
-        break;
-      } else if (dy < 0) {
-        if (!canMoveUp()) {
-          setupInputOnce();
-          return;
-        }
-        await moveUp();
-        break;
-      }
-      }
     
   }
 
@@ -148,8 +116,24 @@ const touchEvent = () => {
       var absDx = Math.abs(dx);
       var absDy = Math.abs(dy);
 
-}
-
+      if (Math.max(absDx, absDy) > 10) {
+        if (absDx > absDy) {
+          if (dx > 0) {
+            moveRight();
+          }
+          else {
+            moveLeft();
+          }
+        } else {
+          if (dy > 0) {
+            moveDown();
+          }
+          else {
+            moveUp();
+          }
+        }
+      }
+  }
 
   gameBoard.ondragstart = () => { return false; };
 
