@@ -67,8 +67,6 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-  gameBoard.addEventListener("touchstart", touchEvent, { once: true });
-  gameBoard.addEventListener("touchend", touchEvent, { once: true });
 }
 
 document.addEventListener('contextmenu', event => event.preventDefault());
