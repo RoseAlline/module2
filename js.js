@@ -84,15 +84,6 @@ async function handleInput(event) {
     
   }
 
-  
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
-
-  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-    await newTile.waitForAnimationEnd()
-    alert("Try again!")
-    return;
-  }
 
   const touchEvent = () => {
     const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
@@ -144,9 +135,16 @@ async function handleInput(event) {
        gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
     }
   }
-  
-  touchEvent()
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
+
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    await newTile.waitForAnimationEnd()
+    alert("Try again!")
+    return;
+  }
   setupInputOnce();
+  touchEvent();
 }
 
 
