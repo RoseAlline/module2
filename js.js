@@ -57,6 +57,10 @@ const touchEvent = () => {
     gameBoard.addEventListener("mouseup", function (event) { end(event) });
 }
 
+setupInputOnce();
+touchEvent()
+
+
 }
 
 touchEvent()
