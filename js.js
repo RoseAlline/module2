@@ -57,7 +57,8 @@ const touchEvent = () => {
      gameBoard.addEventListener("mousedown", (event) => { start(event), { once: true } });
      gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
   }
-
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
 }
 
 
@@ -66,8 +67,6 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-  window.addEventListener("touchstart", touchEvent, { once: true });
-  window.addEventListener("touchend", touchEvent, { once: true });
 }
 
 document.addEventListener('contextmenu', event => event.preventDefault());
