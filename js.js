@@ -121,16 +121,28 @@ const touchEvent = () => {
       if (Math.max(absDx, absDy) > 10) {
         if (absDx > absDy) {
           if (dx > 0) {
+            setupInputOnce();
+              return;
+            }
             await moveRight();
           }
           else {
+            setupInputOnce();
+              return;
+            }
             await moveLeft();
           }
         } else {
           if (dy > 0) {
+              setupInputOnce();
+              return;
+            }
             await moveDown();
           }
           else {
+            setupInputOnce();
+              return;
+            }
             await moveUp();
           }
         }
@@ -140,13 +152,14 @@ const touchEvent = () => {
 
   if (regexp.test(window.navigator.userAgent)) {
 
-    gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-    gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+     gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+     gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 
   } else {
-    gameBoard.addEventListener("mousedown", (event) => { start(event); });
-    gameBoard.addEventListener("mouseup", function (event) { end(event) });
+     gameBoard.addEventListener("mousedown", (event) => { start(event); });
+     gameBoard.addEventListener("mouseup", function (event) { end(event) });
   }
+}
 }
 
 async function moveUp() {
