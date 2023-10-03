@@ -95,7 +95,45 @@ async function handleInput(event) {
 
 
   setupInputOnce();
+  touchEvent()
 
+}
+
+const touchEvent = () => {
+  const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
+  let moveStartX, moveStartY;
+
+  const start = (event) => {
+      moveStartX = event.clientX;
+      moveStartY = event.clientY;
+  }
+
+  const end = (event) => {
+      let moveEndX = event.clientX;
+      let moveEndY = event.clientY;
+
+      var dx = moveEndX - moveStartX;
+      var dy = moveEndY - moveStartY;
+
+      var absDx = Math.abs(dx);
+      var absDy = Math.abs(dy);
+
+      if (Math.max(absDx, absDy) > 10) {
+          self.input("move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up"));
+      }
+  }
+
+  gameBoard.ondragstart = () => { return false; };
+
+  if (regexp.test(window.navigator.userAgent)) {
+
+    gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+    gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+
+  } else {
+    gameBoard.addEventListener("mousedown", (event) => { start(event); });
+    gameBoard.addEventListener("mouseup", function (event) { end(event) });
+  }
 }
 
 async function moveUp() {
