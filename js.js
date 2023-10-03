@@ -58,9 +58,7 @@ const touchEvent = () => {
 }
 
 setupInputOnce();
-touchEvent()
-
-
+touchEvent();
 }
 
 touchEvent()
