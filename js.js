@@ -6,6 +6,59 @@ const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 setupInputOnce();
+touchEvent()
+
+const touchEvent = () => {
+  const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
+  let moveStartX, moveStartY;
+
+  const start = (event) => {
+      moveStartX = event.clientX;
+      moveStartY = event.clientY;
+  }
+
+  const end = (event) => {
+      let moveEndX = event.clientX;
+      let moveEndY = event.clientY;
+
+      var dx = moveEndX - moveStartX;
+      var dy = moveEndY - moveStartY;
+
+      var absDx = Math.abs(dx);
+      var absDy = Math.abs(dy);
+
+      if (Math.max(absDx, absDy) > 10) {
+        if (absDx > absDy) {
+          if (dx > 0) {
+            moveRight();
+          }
+          else {
+            moveLeft();
+          }
+        } else {
+          if (dy > 0) {
+            moveDown();
+          }
+          else {
+            moveUp();
+          }
+        }
+      }
+  }
+
+  gameBoard.ondragstart = () => { return false; };
+
+  if (regexp.test(window.navigator.userAgent)) {
+
+     gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]), { once: true }});
+     gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]), { once: true }});
+
+  } else {
+     gameBoard.addEventListener("mousedown", (event) => { start(event), { once: true } });
+     gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
+  }
+
+}
 
 
 
@@ -13,8 +66,8 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
-  gameBoard.addEventListener("touchstart", handleInput, { once: true });
-  gameBoard.addEventListener("touchend", handleInput, { once: true });
+  gameBoard.addEventListener("touchstart", touchEvent, { once: true });
+  gameBoard.addEventListener("touchend", touchEvent, { once: true });
 }
 
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -84,58 +137,6 @@ async function handleInput(event) {
     
   }
 
-
-  const touchEvent = () => {
-    const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
-    let moveStartX, moveStartY;
-  
-    const start = (event) => {
-        moveStartX = event.clientX;
-        moveStartY = event.clientY;
-    }
-  
-    const end = (event) => {
-        let moveEndX = event.clientX;
-        let moveEndY = event.clientY;
-  
-        var dx = moveEndX - moveStartX;
-        var dy = moveEndY - moveStartY;
-  
-        var absDx = Math.abs(dx);
-        var absDy = Math.abs(dy);
-  
-        if (Math.max(absDx, absDy) > 10) {
-          if (absDx > absDy) {
-            if (dx > 0) {
-              moveRight();
-            }
-            else {
-              moveLeft();
-            }
-          } else {
-            if (dy > 0) {
-              moveDown();
-            }
-            else {
-              moveUp();
-            }
-          }
-        }
-    }
-  
-    gameBoard.ondragstart = () => { return false; };
-  
-    if (regexp.test(window.navigator.userAgent)) {
-  
-       gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]), { once: true }});
-       gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]), { once: true }});
-  
-    } else {
-       gameBoard.addEventListener("mousedown", (event) => { start(event), { once: true } });
-       gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
-    }
-
-  }
 
   const newTile = new Tile(gameBoard);
   grid.getRandomEmptyCell().linkTile(newTile);
