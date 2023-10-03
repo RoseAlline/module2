@@ -125,7 +125,7 @@ async function handleInput(event) {
 
 
   setupInputOnce();
-  touchEvent()
+  touchEvent();
 
 }
 
