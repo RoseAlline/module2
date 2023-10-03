@@ -134,7 +134,9 @@ async function handleInput(event) {
        gameBoard.addEventListener("mousedown", (event) => { start(event), { once: true } });
        gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
     }
+
   }
+
   const newTile = new Tile(gameBoard);
   grid.getRandomEmptyCell().linkTile(newTile);
 
@@ -143,8 +145,8 @@ async function handleInput(event) {
     alert("Try again!")
     return;
   }
+
   setupInputOnce();
-  touchEvent();
 }
 
 
