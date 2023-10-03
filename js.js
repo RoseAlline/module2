@@ -5,7 +5,6 @@ const gameBoard = document.getElementById("game-board");
 const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
-setupInputOnce();
 const touchEvent = () => {
   const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
   let moveStartX, moveStartY;
@@ -55,8 +54,23 @@ const touchEvent = () => {
      gameBoard.addEventListener("mousedown", (event) => { start(event); });
      gameBoard.addEventListener("mouseup", function (event) { end(event) });
   }
+
+  const newTile = new Tile(gameBoard);
+  grid.getRandomEmptyCell().linkTile(newTile);
+
+  if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+    await newTile.waitForAnimationEnd()
+    alert("Try again!")
+    return;
+  }
+
+setupInputOnce();
 }
+
 touchEvent()
+setupInputOnce();
+
+
 
 function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
