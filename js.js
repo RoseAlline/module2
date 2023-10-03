@@ -78,6 +78,7 @@ async function handleInput(event) {
         await moveRight();
         break;
       }
+      if (Math.max(absDx, absDy) > 10) {
       if (dx > 0) {
         if (!canMoveRight()) {
           setupInputOnce();
@@ -108,8 +109,7 @@ async function handleInput(event) {
         await moveUp();
         break;
       }
-       
-
+      }
     
   }
 
