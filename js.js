@@ -57,7 +57,6 @@ const touchEvent = () => {
     gameBoard.addEventListener("mouseup", function (event) { end(event) });
 }
 
-touchEvent();
 }
 
 touchEvent()
