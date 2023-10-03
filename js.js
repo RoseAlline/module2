@@ -119,8 +119,21 @@ const touchEvent = () => {
       var absDy = Math.abs(dy);
 
       if (Math.max(absDx, absDy) > 10) {
-          "move", absDx > absDy ? (dx > 0 ? "Right" : "Left") : (dy > 0 ? "Down" : "Up");
-      }
+        if (absDx > absDy) {
+          if (dx > 0) {
+            await moveRight();
+          }
+          else {
+            await moveLeft();
+          }
+        } else {
+          if (dy > 0) {
+            await moveDown();
+          }
+          else {
+            await moveUp();
+          }
+        }
   }
 
   gameBoard.ondragstart = () => { return false; };
