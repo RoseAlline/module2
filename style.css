@@ -11,18 +11,26 @@ body {
     height: 100vh;
     display: grid;
     overflow: hidden;
-}  
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}     
 
 
 #game-board {
     --cell-size: 10vmin;
     --cell-gap: 2vmin;
-    position: relative;
     display: grid;
     grid-template-columns: repeat(5, var(--cell-size));
     grid-template-rows: repeat(5, var(--cell-size));
     gap: var(--cell-gap);
     border-radius: 1vmin;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overscroll-behavior: contain;
 }
 
 .cell {
@@ -57,4 +65,7 @@ body {
     }
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }     
 
