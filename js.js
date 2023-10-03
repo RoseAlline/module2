@@ -6,7 +6,6 @@ const grid = new Grid(gameBoard);
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 grid.getRandomEmptyCell().linkTile(new Tile(gameBoard));
 setupInputOnce();
-touchEvent()
 
 const touchEvent = () => {
   const regexp = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i;
@@ -57,9 +56,11 @@ const touchEvent = () => {
      gameBoard.addEventListener("mousedown", (event) => { start(event), { once: true } });
      gameBoard.addEventListener("mouseup", function (event) { end(event), { once: true }});
   }
+
   const newTile = new Tile(gameBoard);
   grid.getRandomEmptyCell().linkTile(newTile);
 }
+touchEvent()
 
 
 
