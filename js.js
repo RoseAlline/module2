@@ -57,7 +57,7 @@ const touchEvent = () => {
   }
   grid.getRandomEmptyCell().linkTile(newTile);
 
-  touchEvent()
+  touchEvent();
 
 }
 touchEvent()
