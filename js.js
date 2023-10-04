@@ -146,10 +146,11 @@ async function handleInput(event) {
     await newTile.waitForAnimationEnd()
     alert("Try again!")
     return;
-  }
+  }{
+    gameBoard.addEventListener("mousedown", (event) => { start(event); });
+    gameBoard.addEventListener("mouseup", function (event) { end(event) });
+ }
 
-
-  setupInputOnce();
 }
 
 
