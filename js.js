@@ -42,6 +42,7 @@ const touchEvent = () => {
           }
         }
       }
+
     const newTile = new Tile(gameBoard);
     grid.getRandomEmptyCell().linkTile(newTile);
   }
@@ -134,12 +135,9 @@ async function handleInput(event) {
     
   }
 
-  const keys = ['ArrowLeft', 'ArrowDown', 'ArrowUp', 'ArrowRight'];
-
-  if (keys.includes(event.key)) {
     const newTile = new Tile(gameBoard);
     grid.getRandomEmptyCell().linkTile(newTile);
-  }
+  
   
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     await newTile.waitForAnimationEnd()
