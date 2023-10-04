@@ -42,32 +42,23 @@ const touchEvent = () => {
           }
         }
       }
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
-      
   }
 
   gameBoard.ondragstart = () => { return false; };
 
-  
   if (regexp.test(window.navigator.userAgent)) {
 
-    gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
-    gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
+     gameBoard.addEventListener("touchstart", (event) => { start(event.touches[0]); });
+     gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 
-} else {
-  {
-    gameBoard.addEventListener("mousedown", (event) => { start(event); });
-    gameBoard.addEventListener("mouseup", function (event) { end(event) });
- }
-
+  } else {
+     gameBoard.addEventListener("mousedown", (event) => { start(event); });
+     gameBoard.addEventListener("mouseup", function (event) { end(event) });
+  }
 }
-}
-
 touchEvent()
 
 function setupInputOnce() {
-  
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
@@ -77,6 +68,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 window.addEventListener('touch', event => event.preventDefault());
 
 async function handleInput(event) {
+  
   switch (event.key || event.button || event.deltaY) {
     case "ArrowUp":
       if (!canMoveUp()) {
@@ -140,9 +132,13 @@ async function handleInput(event) {
     
   }
 
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
+  const keys = ['ArrowLeft', 'ArrowDown', 'ArrowUp', 'ArrowRight'];
 
+  if (keys.includes(event.key)) {
+    const newTile = new Tile(gameBoard);
+    grid.getRandomEmptyCell().linkTile(newTile);
+  }
+  
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     await newTile.waitForAnimationEnd()
     alert("Try again!")
