@@ -53,11 +53,14 @@ const touchEvent = () => {
     gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 
 } else {
-    gameBoard.addEventListener("mousedown", (event) => { start(event); });
-    gameBoard.addEventListener("mouseup", function (event) { end(event) });
+    
+  setupInputOnce()
 }
 
-setupInputOnce();
+
+const newTile = new Tile(gameBoard);
+grid.getRandomEmptyCell().linkTile(newTile);
+
 }
 
 touchEvent()
