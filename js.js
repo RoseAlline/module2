@@ -54,11 +54,10 @@ const touchEvent = () => {
 
 } else {
     
-  setupInputOnce()
+  handleInput()
 }
 
 
-const newTile = new Tile(gameBoard);
 grid.getRandomEmptyCell().linkTile(newTile);
 
 }
