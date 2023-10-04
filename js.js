@@ -45,9 +45,7 @@ const touchEvent = () => {
           }
         }
       }
-
-  const newTile = new Tile(gameBoard);
-  grid.getRandomEmptyCell().linkTile(newTile);
+      
   }
 
   gameBoard.ondragstart = () => { return false; };
@@ -59,6 +57,11 @@ const touchEvent = () => {
     gameBoard.addEventListener("touchend", function (event) { end(event.changedTouches[0]) });
 
 } else {
+  {
+    gameBoard.addEventListener("mousedown", (event) => { start(event); });
+    gameBoard.addEventListener("mouseup", function (event) { end(event) });
+ }
+
 }
 }
 
@@ -69,7 +72,6 @@ function setupInputOnce() {
   window.addEventListener("keydown", handleInput, { once: true });
   window.addEventListener("mousedown", handleInput, { once: true });
   window.addEventListener("wheel", handleInput, { once: true });
- 
 }
 
 document.addEventListener('contextmenu', event => event.preventDefault());
@@ -146,11 +148,10 @@ async function handleInput(event) {
     await newTile.waitForAnimationEnd()
     alert("Try again!")
     return;
-  }{
-    gameBoard.addEventListener("mousedown", (event) => { start(event); });
-    gameBoard.addEventListener("mouseup", function (event) { end(event) });
- }
+  }
 
+
+  setupInputOnce();
 }
 
 
