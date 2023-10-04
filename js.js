@@ -42,6 +42,9 @@ const touchEvent = () => {
           }
         }
       }
+
+    const newTile = new Tile(gameBoard);
+    grid.getRandomEmptyCell().linkTile(newTile);
   }
 
   gameBoard.ondragstart = () => { return false; };
